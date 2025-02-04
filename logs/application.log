@@ -397,3 +397,8 @@
 2025-02-04 16:22:13 [http-nio-8080-exec-3] INFO  c.e.r.controller.UserController - Request received to /api/tickets/8?ticket=10
 2025-02-04 16:22:13 [http-nio-8080-exec-3] ERROR c.e.r.controller.UserController - Ticket not found while getting user ticket with id: 10
 2025-02-04 16:22:19 [http-nio-8080-exec-5] INFO  c.e.r.controller.UserController - Request received to /api/tickets/8?ticket=2
+2025-02-04 16:29:00 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-02-04 16:29:00 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-02-04 16:29:00 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-02-04 16:29:00 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-02-04 16:29:00 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

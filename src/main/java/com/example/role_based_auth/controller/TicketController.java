@@ -1,5 +1,6 @@
 package com.example.role_based_auth.controller;
 
+import com.example.role_based_auth.entity.TicketEntity;
 import com.example.role_based_auth.service.DefaultUserService;
 import com.example.role_based_auth.service.TicketService;
 import org.slf4j.Logger;
@@ -51,6 +52,21 @@ public class TicketController {
             return new ResponseEntity<>("Ticket not found", HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             logger.error("Unexpected error while getting user ticket!");
+            return new ResponseEntity<>("Unexpected error occurred!", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("{id}/buy")
+    public ResponseEntity<?> buyTicket(@PathVariable Long id, @RequestBody TicketEntity ticket) {
+        logger.info("Request received to /api/tickets/{}/buy", id);
+        try {
+            logger.debug("Buying ticket by user with id: {}", id);
+            return new ResponseEntity<>(ticketService.addTicket(id, ticket), HttpStatus.OK);
+        } catch (UsernameNotFoundException e) {
+            logger.error("User not found with id: {} while buying ticket", id);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            logger.error("Unexpected error while buying ticket by user with id: {}", id);
             return new ResponseEntity<>("Unexpected error occurred!", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

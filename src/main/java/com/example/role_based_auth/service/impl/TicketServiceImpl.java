@@ -22,12 +22,12 @@ public class TicketServiceImpl implements TicketService {
     DefaultUserService userService;
 
     @Override
-    public TicketEntity addTicket(Long userId, TicketEntity ticket) {
+    public TicketDto addTicket(Long userId, TicketEntity ticket) {
         UserEntity user = userService.getUserById(userId);
         if (user == null) throw new UsernameNotFoundException("User not found!");
 
         ticket.setUser(user);
-        return ticketRepository.save(ticket);
+        return TicketMapper.toModel(ticketRepository.save(ticket));
     }
 
     @Override
