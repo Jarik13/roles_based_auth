@@ -9,4 +9,5 @@ import org.springframework.stereotype.Service;
 public interface DefaultUserService extends UserDetailsService {
     UserEntity save(UserRegisterDto userDto);
     UserEntity getUser(String email);
+    String deleteUser(Long id);
 }

@@ -52,6 +52,12 @@ public class DefaultUserServiceImpl implements DefaultUserService {
     }
 
     @Override
+    public String deleteUser(Long id) {
+        userRepository.deleteById(id);
+        return "User deleted successfully!";
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserEntity user = userRepository.findByEmail(username);
         if (user == null) {
