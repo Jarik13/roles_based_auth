@@ -51,7 +51,13 @@ public class TicketServiceImpl implements TicketService {
         UserEntity user = userService.getUserById(userId);
         if (user == null) throw new UsernameNotFoundException("User not found!");
 
-        return TicketMapper.toModel(ticketRepository.findById(ticketId)
-                .orElseThrow(() -> new RuntimeException("Ticket not found!")));
+        TicketEntity ticket = ticketRepository.findById(ticketId)
+                .orElseThrow(() -> new RuntimeException("Ticket not found with id: " + ticketId));
+
+        if (!ticket.getUser().getId().equals(userId)) {
+            throw new RuntimeException("Ticket does not belong to user with id: " + userId);
+        }
+
+        return TicketMapper.toModel(ticket);
     }
 }
