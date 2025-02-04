@@ -25,9 +25,8 @@ public class UserEntity {
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
     )
-    Set<Role> roles = new HashSet<Role>();
+    Set<Role> roles = new HashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     List<TicketEntity> tickets;
-
 }

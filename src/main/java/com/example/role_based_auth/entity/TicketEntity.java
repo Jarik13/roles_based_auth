@@ -1,6 +1,5 @@
 package com.example.role_based_auth.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -12,6 +11,7 @@ public class TicketEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String status;
     private Long seatNumber;
     private double price;
 
