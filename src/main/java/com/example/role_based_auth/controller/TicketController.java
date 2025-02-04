@@ -48,7 +48,7 @@ public class TicketController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         } catch (RuntimeException e) {
             logger.error("Ticket not found while getting user ticket with id: {}", ticketId);
-            return new ResponseEntity<>("Unexpected error occurred!", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Ticket not found", HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             logger.error("Unexpected error while getting user ticket!");
             return new ResponseEntity<>("Unexpected error occurred!", HttpStatus.INTERNAL_SERVER_ERROR);
