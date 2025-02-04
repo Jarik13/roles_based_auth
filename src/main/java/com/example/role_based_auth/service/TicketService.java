@@ -11,4 +11,5 @@ public interface TicketService {
     TicketEntity addTicket(Long userId, TicketEntity ticket);
     String deleteTicket(Long id);
     List<TicketDto> getAllUserTickets(Long id);
+    TicketDto getTicketById(Long userId, Long ticketId);
 }

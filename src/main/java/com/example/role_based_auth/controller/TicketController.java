@@ -35,4 +35,23 @@ public class TicketController {
             return new ResponseEntity<>("Unexpected error occurred!", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("{id}")
+    public ResponseEntity<?> getUserTicketById(@PathVariable(name = "id") Long userId,
+                                               @RequestParam(name = "ticket") Long ticketId) {
+        logger.info("Request received to /api/tickets/{}?ticket={}", userId, ticketId);
+        try {
+            logger.debug("Fetching user ticket with id: {}", ticketId);
+            return new ResponseEntity<>(ticketService.getTicketById(userId, ticketId), HttpStatus.OK);
+        } catch (UsernameNotFoundException e) {
+            logger.error("User not found with id: {} while get user ticket with id: {}", userId, ticketId);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        } catch (RuntimeException e) {
+            logger.error("Ticket not found while getting user ticket with id: {}", ticketId);
+            return new ResponseEntity<>("Unexpected error occurred!", HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (Exception e) {
+            logger.error("Unexpected error while getting user ticket!");
+            return new ResponseEntity<>("Unexpected error occurred!", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

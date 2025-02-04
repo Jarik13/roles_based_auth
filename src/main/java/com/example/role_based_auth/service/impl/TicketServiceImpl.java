@@ -45,4 +45,13 @@ public class TicketServiceImpl implements TicketService {
 
         return user.getTickets().stream().map(TicketMapper::toModel).toList();
     }
+
+    @Override
+    public TicketDto getTicketById(Long userId, Long ticketId) {
+        UserEntity user = userService.getUserById(userId);
+        if (user == null) throw new UsernameNotFoundException("User not found!");
+
+        return TicketMapper.toModel(ticketRepository.findById(ticketId)
+                .orElseThrow(() -> new RuntimeException("Ticket not found!")));
+    }
 }
