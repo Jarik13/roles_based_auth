@@ -52,6 +52,11 @@ public class DefaultUserServiceImpl implements DefaultUserService {
     }
 
     @Override
+    public UserEntity getUserById(Long id) {
+        return userRepository.findById(id).orElseThrow(() -> new UsernameNotFoundException("User not found!"));
+    }
+
+    @Override
     public String deleteUser(Long id) {
         userRepository.deleteById(id);
         return "User deleted successfully!";

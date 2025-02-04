@@ -1,17 +1,42 @@
 package com.example.role_based_auth.controller;
 
+import com.example.role_based_auth.service.DefaultUserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/admins")
 @PreAuthorize("hasAuthority('ADMIN')")
 public class AdminController {
+    @Autowired
+    private DefaultUserService userService;
+
     @GetMapping("/test")
     public String getTestMessage() {
         return "It is message from AdminController!";
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getUserById(@PathVariable Long id) {
+        try {
+            return new ResponseEntity<>(userService.getUserById(id), HttpStatus.OK);
+        } catch (UsernameNotFoundException e) {
+            // logger
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteUserById(@PathVariable Long id) {
+        try {
+            return new ResponseEntity<>(userService.deleteUser(id), HttpStatus.OK);
+        } catch (UsernameNotFoundException e) {
+            // logger
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
     }
 }
