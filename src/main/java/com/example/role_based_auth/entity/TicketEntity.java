@@ -1,5 +1,6 @@
 package com.example.role_based_auth.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
