@@ -47,7 +47,7 @@ public class DefaultUserServiceImpl implements DefaultUserService {
     }
 
     @Override
-    public UserEntity getUser(String email) {
+    public UserEntity getUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 

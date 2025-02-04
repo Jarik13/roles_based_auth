@@ -20,6 +20,16 @@ public class AdminController {
         return "It is message from AdminController!";
     }
 
+    @GetMapping
+    public ResponseEntity<?> getUserByEmail(@RequestParam String email) {
+        try {
+            return new ResponseEntity<>(userService.getUserByEmail(email), HttpStatus.OK);
+        } catch (UsernameNotFoundException e) {
+            // logger
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getUserById(@PathVariable Long id) {
         try {
